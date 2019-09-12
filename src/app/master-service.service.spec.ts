@@ -5,15 +5,26 @@ import { ValueServiceService } from './value-service.service';
 
 fdescribe('MasterServiceService', () => {
   let masterService: MasterServiceService;
-  // beforeEach(() => TestBed.configureTestingModule({}));
+  let valueServiceSpy: jasmine.SpyObj<ValueServiceService>;
 
-  // it('should be created', () => {
-  //   const service: MasterServiceService = TestBed.get(MasterServiceService);
-  //   expect(service).toBeTruthy();
-  // });
+  beforeEach(() => {
+    const spyServiceObj = jasmine.createSpyObj('ValueService', ['getValue']);
 
-  it('#getValue should return real value from the real service', () => {
-    masterService = new MasterServiceService(new ValueServiceService);
-    expect(masterService.getValue()).toBe('this is real value');
+    TestBed.configureTestingModule({
+      providers: [
+        MasterServiceService,
+        { provide: ValueServiceService, useValue: spyServiceObj }
+      ]
+    })
+
+    masterService = TestBed.get(MasterServiceService);
+    valueServiceSpy = TestBed.get(ValueServiceService);
+  })
+
+  it('should return the real value', () => {
+    const stubbedValue = 'this is stubbed value';
+    valueServiceSpy.getValue.and.returnValue(stubbedValue);
+
+    expect(masterService.getValue()).toBe(stubbedValue);
   })
 });
