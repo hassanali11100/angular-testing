@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LightSwitchComponent } from './light-switch.component';
 
-fdescribe('LightSwitchComponent', () => {
+describe('LightSwitchComponent', () => {
   it('#clicked should toggle #isOn', () => {
     const comp = new LightSwitchComponent();
 
