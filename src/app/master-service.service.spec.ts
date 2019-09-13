@@ -5,7 +5,7 @@ import { ValueServiceService } from './value-service.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
-fdescribe('MasterServiceService', () => {
+describe('MasterServiceService', () => {
   let masterService: MasterServiceService;
   let valueServiceSpy: jasmine.SpyObj<ValueServiceService>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>
